@@ -1,0 +1,385 @@
+:root {
+  --text-color: rgb(245, 245, 245);
+  --hover-text: rgb(102, 72, 97);
+  
+  --border-color: rgb(60, 46, 68);
+}
+
+html {
+  box-sizing: border-box;
+  width: 100%;
+}
+
+*,
+*::after,
+*::before {
+  box-sizing: inherit;
+}
+
+body {
+  background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(./images/pink-sky-2.jpeg);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  font-family: PT Serif, serif;
+  font-size: 20px;
+  line-height: 1.2;
+  letter-spacing: 0.1em;
+}
+
+
+
+ul {
+  padding-left: 0;
+  margin-bottom: 0;
+}
+
+li {
+  list-style-type: none;
+}
+a {
+   text-decoration: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+p {
+  margin: 0;
+  padding: 0;
+}
+button {
+  padding-left: 0px;
+  padding-right: 0px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+
+.container-body {
+  width: 1100px;
+  margin: 40px auto;
+  /* padding: 20px 20px; */
+  background:rgba(149, 121, 144, 0.2);
+  
+border-radius: 0px 0px 4px 4px;
+box-shadow: 11px 19px 24px rgba(0, 0, 0, 0.4);
+}
+.container-header {display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  /* background: rgba(48, 53, 77, 0.6); */
+  background: linear-gradient(103deg, rgb(48, 53, 77) 10%, rgb(96, 60, 90) 64%);
+  opacity: 80%;
+  outline: 1px solid rgba(48, 53, 77, 0.9);
+  box-shadow: 15px 6px 23px 9px rgba(0, 0, 0, 0.2);
+}
+
+/* лівий заголовок */
+.header-1 {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 400px;
+  list-style: none;
+}
+.header1-a,
+.fa-star {
+  padding: 15px 20px;
+  color: var(--text-color);
+}
+.header1-a:hover,
+.header1-a:focus {
+  color: var(--text-color);
+  cursor: pointer;
+  font-weight: bold;
+    text-shadow: .07em 0 rgb(29, 24, 40);
+}
+.fa-solid:hover,
+.fa-solid:focus,
+.fa-star:hover,
+.fa-star:focus
+ {
+  color: var(--hover-text);
+  cursor: pointer;
+  font-weight: bold;
+    text-shadow: .07em 0 rgb(29, 24, 40);
+    font-size: 22px;
+}
+
+
+/* правий заголовок */
+.header-2 {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-left: auto;
+  /* width: 100%; */
+  /* background-color:aqua; */
+}
+
+.geolocation {
+  margin-right: 10px;
+  border: none;
+  background: transparent;
+  color: var(--text-color);
+} 
+
+.SearchBoxForm {
+  display: flex;
+  justify-content: center;
+}
+.SearchBoxInput:hover,
+.SearchBoxInput:focus {
+  border: 1px solid var(--text-color);
+}
+
+.SearchBoxInput:focus-visible {
+  outline:1px solid var(--hover-text);
+}
+.SearchBoxInput {
+  border: 1.5px solid var(--text-color);
+  border-radius: 3px;
+  font-family: inherit;
+  font-size: 100%;
+  width: 230px;
+  padding: 4px;
+  padding-right: 0;
+}
+
+.SearchBoxButton {
+  position: relative;
+  border: none;
+  background: transparent;
+  color: var(--hover-text);
+  right: 30px;
+}
+
+.SearchBoxButton:hover,
+.SearchBoxButton:focus {
+  color:rgb(22, 10, 20);
+  font-size: 24px;
+}
+/* головний + бокова панель */
+.container-main-and-sidebar {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: stretch;
+  outline: 1px solid var(--border-color); */
+}
+
+/* Бокова панель */
+.sidebar {
+  padding: 10px;
+  width: 40px;
+  border-bottom: none;
+  background: linear-gradient(103deg, rgb(48, 53, 77) 10%, rgb(96, 60, 90) 64%);
+  opacity: 80%;
+  outline: 1px solid rgba(48, 53, 77, 0.9);
+  box-shadow: 15px 6px 23px 9px rgba(0, 0, 0, 0.2);
+}
+.sidebar .list {
+  text-align: center;
+  
+}
+
+.forecast3 .item {
+  padding-top: 10px;
+}
+.sidebar .item + .item {
+padding-top: 20px;
+}
+.sidebar  a {
+  color: var(--text-color);
+  font-size: 18px ;
+}
+.sidebar a:hover {
+  display: block;
+  color: var(--hover-text);
+  font-size: 22px;
+}
+
+
+
+
+/* main container */
+
+.container-main {
+   width: 1060px;
+  padding-right: 15px;
+  padding-left: 15px;
+  text-align: center;
+  color: var(--text-color);
+}
+.forecast h1 {
+  display: none;
+}
+.forecast h2 {
+  padding-top: 30px;
+  font-weight: 700;
+  font-size: 60px;
+  line-height: 1.2;
+  letter-spacing:0.4em;
+
+}
+.forecast1 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 270px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 25px;
+}
+
+.forecast1 p {
+  font-size: 55px;
+}
+.forecast1 h3 {
+  font-size: 70px;
+}
+.button-CF {
+  display: flex;
+  flex-direction: column;
+
+}
+.button-CF button {
+  border: none;
+  background: transparent;
+  color: var(--text-color);
+  font-size: 20px;
+  padding: 5px 10px;
+}
+.button-CF button:hover,
+.button-CF button:focus {
+  font-size: 30px;
+color: blanchedalmond;
+cursor: pointer;
+  font-weight: bold;
+}
+.button-CF button:checked {
+font-size: 22px;
+color: blanchedalmond;
+cursor: pointer;
+  font-weight: bold;
+}
+
+/* forecast2 */
+
+.forecast2 {
+  margin-top: 5px;
+}
+.forecast2 .text1 {
+  font-size: 18px;
+}
+.forecast2 .text2 {
+  margin-top: 10px;
+  font-size: 12px;
+
+}
+
+/*  контейнер з деталями про погоду  */
+.forecast3 {
+  display: flex;
+  flex-wrap: wrap;
+  width: 600px;
+  margin: 30px auto;
+}
+
+.forecast3 .item {
+  width:calc((100% - 40px)/3);
+font-size: 14px;
+color:var(--text-color);
+margin-right: 20px;
+}
+
+.forecast3 .item:nth-child(3n) {
+  margin-right: 0;
+}
+
+
+/* Next 5 days forecast: */
+.forecast-next {
+  margin-bottom: 30px;
+}
+
+
+.forecast-next h2 {
+  margin-left: 10px;
+  margin-bottom: 10px;
+  font-size: 18px;
+  text-align: left;
+
+}
+.container-next {
+  display: flex;
+  justify-content: space-between;
+  
+}
+
+
+/* картки */
+.weather {
+  width: calc((100% - 120px) / 7);
+  padding-left: 6px;
+  background:rgba(149, 121, 144, 0.4);
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.4), 0px 1px 1px rgba(0, 0, 0, 0.14), 0px 2px 1px rgba(0, 0, 0, 0.2);
+border-radius: 0px 0px 4px 4px;
+text-align: left;
+color: var(--text-color);
+}
+
+.card-title {
+font-size: 20px;
+padding-top: 8px;
+}
+
+.card-2-title {
+  font-size: 40px;
+  padding-left: 6px;
+}
+.card-text {
+  font-size: 26px;
+  padding-bottom: 8px;
+}
+.card-text span {
+  font-size: 16px;
+}
+.card-2-text {
+  font-size: 14px;
+  padding-bottom: 8px;
+}
+
+/* footer */
+
+.footer-title {
+  text-align: left;
+  margin-left: 50px;
+  margin-top: 10px;
+padding-bottom: 10px;
+}
+
+.footer-logo {
+color: rgb(29, 24, 40) ;
+}
+.footer-a
+ {
+  color: var(--text-color);
+font-size: 16px;
+}
+.footer-title:hover,
+.footer-a:hover {
+  color: rgb(29, 24, 40) ;
+  cursor: pointer;
+  font-weight: bold;
+}
+.footer-logo:hover,
+.footer-logo:focus {
+  color: var(--text-color);
+}
