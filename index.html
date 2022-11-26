@@ -36,94 +36,85 @@
     <link
       rel="stylesheet"
       href="./style.css" />
-
+    <!-- ajax -->
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
     <title>Weather App</title>
   </head>
 
   <!-- BODY -->
-  <body >
+  <body>
     <div class="container-body">
-
-
-    <header class="container-header">
-      <!-- header-1 -->
-      <ul class="header-1">
-        <li>
-          <a
-            class="header1-a"
-            href=""
-            >Kyiv</a
-          >
-        </li>
-        <li>
-          <a
-            class="header1-a"
-            href=""
-            >Lviv</a
-          >
-        </li>
-        <li>
-          <a
-            class="header1-a"
-            href=""
-            >Krakow</a
-          >
-        </li>
-        <li><i class="fa-regular fa-star"></i></li>
-      </ul>
-      <!-- header-2 -->
-      <div class="header-2">
-        <button
-          class="geolocation"
-          id="geolocation"
-          type="current-location">
-          <i class="fa-solid fa-location-dot"></i>
-        </button>
-
-        <!-- Search for city -->
-        <form
-          class="SearchBoxForm"
-          id="search-city"
-          autocomplete="off"
-          method="GET"
-          autofocus="true">
-          <input
-            class="SearchBoxInput"
-            type="search"
-            placeholder="Search for city..."
-            id="city-name" />
+      <header class="container-header">
+        <!-- header-1 -->
+        <ul class="header-1">
+          <li>
+            <button class="header1-a">
+           Kyiv</button>
+          </li>
+          <li> <button class="header1-a">
+            Lviv</button>
+          </li>
+          <li> <button class="header1-a">
+            Krakow</button>
+          </li>
+          <li><i class="fa-regular fa-star"></i></li>
+        </ul>
+        <!-- header-2 -->
+        <div class="header-2">
           <button
-            class="SearchBoxButton"
-            type="submit">
-            <span><i class="fa-solid fa-magnifying-glass"></i></span>
+            class="geolocation"
+            id="geolocation">
+            <i class="fa-solid fa-location-dot"></i>
           </button>
-        </form>
-      </div>
-    </header>
-    <main class="container-main-and-sidebar">
-      
+
+          <!-- Search for city -->
+          <form
+            class="SearchBoxForm"
+            id="search-form">
+            
+            <input
+              class="SearchBoxInput"
+              type="text"
+              placeholder="Search for city..."
+              autocomplete="off"
+              autofocus="on"
+              id="search-text-input" />
+            <button
+              class="SearchBoxButton"
+              type="submit"
+              value="Search">
+              <span><i class="fa-solid fa-magnifying-glass"></i></span>
+            </button>
+          </form>
+        </div>
+      </header>
+      <main class="container-main-and-sidebar">
         <!-- Main content -->
         <section class="container-main">
           <div class="forecast">
             <!--  скритий title -->
             <h1>forecast</h1>
-            <h2>City</h2>
+            <h2 class="sity-name">City</h2>
+            <h3 class="sity-weather"></h3>
 
             <!-- forecast1 -->
             <div class="forecast1">
               <p>🌤</p>
 
-              <h3>28 &deg;</h3>
+              <h3> <span class="number" id="weather">28 </span> &deg;</h3>
               <form class="button-CF">
                 <button
-                  type="radio"
+                  type="button"
                   checked
-                  name="conversion">
+                  name="conversion"
+                  class="button-C"
+                  >
                   C
                 </button>
                 <button
-                  type="radio"
-                  name="conversion">
+                  type="button"
+                  name="conversion"
+                  class="button-F">
                   F
                 </button>
               </form>
@@ -131,18 +122,19 @@
 
             <!-- forecast2 -->
             <div class="forecast2">
-              <p class="text1">Mostly Cloudly</p>
+              <p class="text1">fdff</p>
               <p class="text2">Updated as of 05:22 PM</p>
+              
             </div>
 
             <!-- контейнер з деталями про погоду -->
             <section class="forecast3">
-              <div class="item">Feels like <span id="">31 &deg;</span></div>
-              <div class="item">Wind &rsaquo; <span id="">4 km/h</span></div>
-              <div class="item">Visibility <span id="">6 km</span></div>
-              <div class="item">Barometer <span id="">1001.00 mb</span></div>
-              <div class="item">Humidity <span id="">74%</span></div>
-              <div class="item">Dew Point <span id="">23 &deg;</span></div>
+              <div class="item">Feels like <span id="feels">31</span>&deg;</div>
+              <div class="item">Temp min <span id="temp_min"></span>&deg;</div>
+              <div class="item">Visibility <span id="visibility">6 </span> km</div>
+              <div class="item">Wind &rsaquo; <span id="wind">4</span> km/h</div>
+              <div class="item">Temp max <span id="temp_max"></span>&deg;</div>
+              <div class="item">Humidity <span id="humidity">74</span>%</div>
             </section>
           </div>
           <!-- Next 5 days forecast: -->
@@ -215,18 +207,19 @@
             </ul>
           </nav>
         </aside>
-    </main>
+      </main>
 
-    <footer class="footer-title">
-      <i class="fa-brands fa-github footer-logo"></i>
-      
-      <a
-        href="https://github.com/MajaTrof/Weather-app.git"
-        
-        title="Nataliia Trofymchuk" class="footer-a">
-       
-        Open-source code by Nataliia Trofymchuk</a
-      >
-    </footer>
-  </div></body>
+      <footer class="footer-title">
+        <i class="fa-brands fa-github footer-logo"></i>
+
+        <a
+          href="https://github.com/MajaTrof/Weather-app.git"
+          title="Nataliia Trofymchuk"
+          class="footer-a">
+          Open-source code by Nataliia Trofymchuk</a
+        >
+      </footer>
+    </div>
+      <script src="./index.js"></script>
+  </body>
 </html>

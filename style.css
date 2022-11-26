@@ -94,6 +94,11 @@ box-shadow: 11px 19px 24px rgba(0, 0, 0, 0.4);
   padding: 15px 20px;
   color: var(--text-color);
 }
+.header1-a {
+  background: transparent;
+  text-decoration: none;
+  border: medium none;
+}
 .header1-a:hover,
 .header1-a:focus {
   color: var(--text-color);
@@ -171,7 +176,7 @@ box-shadow: 11px 19px 24px rgba(0, 0, 0, 0.4);
   display: flex;
   flex-direction: row-reverse;
   align-items: stretch;
-  outline: 1px solid var(--border-color); */
+  outline: 1px solid var(--border-color); 
 }
 
 /* Бокова панель */
@@ -225,8 +230,6 @@ padding-top: 20px;
   font-weight: 700;
   font-size: 60px;
   line-height: 1.2;
-  letter-spacing:0.4em;
-
 }
 .forecast1 {
   display: flex;
@@ -277,13 +280,18 @@ cursor: pointer;
 }
 .forecast2 .text1 {
   font-size: 18px;
+  padding-top: 8px;
+  padding-bottom: 6px;
 }
 .forecast2 .text2 {
   margin-top: 10px;
   font-size: 12px;
-
 }
 
+.forecast2 .text1::first-letter {
+  text-transform: uppercase;
+  
+}
 /*  контейнер з деталями про погоду  */
 .forecast3 {
   display: flex;
