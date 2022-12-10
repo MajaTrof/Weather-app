@@ -241,7 +241,7 @@ padding-top: 20px;
   margin-top: 25px;
 }
 
-.forecast1 p {
+.forecast1 img {
   font-size: 55px;
 }
 .forecast1 h3 {
@@ -252,14 +252,14 @@ padding-top: 20px;
   flex-direction: column;
 
 }
-.button-CF button {
+.button-CF a {
   border: none;
   background: transparent;
   color: var(--text-color);
   font-size: 20px;
   padding: 5px 10px;
 }
-.button-CF button:hover,
+/* .button-CF button:hover,
 .button-CF button:focus {
   font-size: 30px;
 color: blanchedalmond;
@@ -271,6 +271,19 @@ font-size: 22px;
 color: blanchedalmond;
 cursor: pointer;
   font-weight: bold;
+} */
+
+.button-CF .active {
+  font-size: 30px;
+color: blanchedalmond;
+cursor: pointer;
+  font-weight: bold;
+}
+
+.button-CF .active:hover,
+.button-CF .active:focus {
+  text-decoration: none;
+  font-size: 30px;
 }
 
 /* forecast2 */
