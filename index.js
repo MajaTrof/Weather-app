@@ -88,11 +88,11 @@ function displayForecast(response) {
 			`
 		<div class="col-2  weather">
 		<h4 class="card-title">${formatDay(forecastDay.dt)} ${formatDate(forecastDay.dt)}</h4>
-		<h5 class="card-2-title"> 
+	 
 		<img src="http://openweathermap.org//img/wn/${
 			forecastDay.weather[0].icon
 		}@2x.png" alt="icon"  class="card-2-title" />  
-		</h5>
+		
 		<p class="card-text">${Math.round(forecastDay.temp.max)}&deg;<span class="pad"> ${Math.round(
 				forecastDay.temp.min)
 			} &deg;</span></p>
@@ -125,12 +125,18 @@ function displayWeather(response) {
 	document.querySelector("#feels").innerHTML = Math.round(response.data.main.feels_like);
 	document.querySelector("#temp_max").innerHTML = Math.round(response.data.main.temp_max);
 	document.querySelector("#temp_min").innerHTML = Math.round(response.data.main.temp_min);
-	document.querySelector("#visibility").innerHTML = response.data.visibility / 1000;
+	document.querySelector("#visibility").innerHTML = Math.round(response.data.visibility / 1000);
 	let iconElement = document.querySelector("#icon");
 	iconElement.setAttribute("src",`http://openweathermap.org//img/wn/${response.data.weather[0].icon}@2x.png`);
 	iconElement.setAttribute("alt", response.data.weather[0].description);
 
+	
+
+    document.querySelector("#wind-text").innerHTML = units == "metric" ? "km/h" : "mph";
+
+
 	getForecast(response.data.coord);
+
 }
 
 
@@ -147,7 +153,7 @@ function search(city) {
 
 function displayFahrenheitTemperature(event) {
 	event.preventDefault();
-	let temperatureElement = document.querySelector("#temperature");
+	// let temperatureElement = document.querySelector("#temperature");
 	
 	celsiusLink.classList.remove("active");
 	fahrenheitLink.classList.add("active");
@@ -195,6 +201,8 @@ function getCurrentLocation(event) {
 
 let currentLocationButton = document.querySelector("#geolocation");
 currentLocationButton.addEventListener("click", getCurrentLocation);
+
+
 
 
 search(currentCity);
