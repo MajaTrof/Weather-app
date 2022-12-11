@@ -130,10 +130,7 @@ function displayWeather(response) {
 	iconElement.setAttribute("src",`http://openweathermap.org//img/wn/${response.data.weather[0].icon}@2x.png`);
 	iconElement.setAttribute("alt", response.data.weather[0].description);
 
-	
-
     document.querySelector("#wind-text").innerHTML = units == "metric" ? "km/h" : "mph";
-
 
 	getForecast(response.data.coord);
 
@@ -202,6 +199,14 @@ function getCurrentLocation(event) {
 let currentLocationButton = document.querySelector("#geolocation");
 currentLocationButton.addEventListener("click", getCurrentLocation);
 
+let kyivLink = document.querySelector("#Kyiv");
+kyivLink.addEventListener("click", (event) => { event.preventDefault(); search("Kyiv");});
+
+let lvivLink = document.querySelector("#Lviv");
+lvivLink.addEventListener("click", (event) => { event.preventDefault(); search("Lviv");});
+
+let crakowLink = document.querySelector("#Krakow");
+crakowLink.addEventListener("click", (event) => { event.preventDefault(); search("Cracow");});
 
 
 
