@@ -52,6 +52,11 @@ let fullDate =
 	":" +
 	myDate.getSeconds();
 
+let curdate = document.querySelector("#current_time");
+curdate.innerHTML = fullDate;
+
+let currentCity = "New York";
+let units="metric";
 
 	let apiBase = "https://api.openweathermap.org";
 	let apiKey = "2d96d64425dca1d6eda00d942a281c0d";
@@ -65,25 +70,30 @@ function formatDay(timestamp) {
 	return days[day];
 }
 
+function formatDate(timestamp) {
+	return new Date(timestamp * 1000).getDate();
+}
+
 function displayForecast(response) {
+	console.log(response.data);
 	let forecast = response.data.daily;
 	let forecastElement = document.querySelector("#forecast");
 
 	let forecastHTML = `<div class="row">`;
 	forecast.forEach(function (forecastDay, index) {
-		if (index < 7) {
+		if (index > 0 && index < 8) {
+			console.log(forecastDay);
 			forecastHTML =
 			forecastHTML +
 			`
 		<div class="col-2  weather">
-		<h4 class="card-title">${formatDay(forecastDay.dt)}</h4>
-		<h4 class="card-title"></h4>
+		<h4 class="card-title">${formatDay(forecastDay.dt)} ${formatDate(forecastDay.dt)}</h4>
 		<h5 class="card-2-title"> 
 		<img src="http://openweathermap.org//img/wn/${
 			forecastDay.weather[0].icon
 		}@2x.png" alt="icon"  class="card-2-title" />  
 		</h5>
-		<p class="card-text">${Math.round(forecastDay.temp.max)}&deg;<span>${Math.round(
+		<p class="card-text">${Math.round(forecastDay.temp.max)}&deg;<span class="pad"> ${Math.round(
 				forecastDay.temp.min)
 			} &deg;</span></p>
 		<p class="card-2-text">Cloudy</p>
@@ -98,12 +108,14 @@ function displayForecast(response) {
 
 function getForecast(coordinates) {
 	console.log(coordinates);
-	let apiUrl = `${apiBase}/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
+	let apiUrl = `${apiBase}/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=${units}`;
 	axios.get(apiUrl).then(displayForecast);
 }
 
 // змінює параметри погодні відносно міста
 function displayWeather(response) {
+	currentCity = response.data.name;
+
 	document.querySelector(".sity-name").innerHTML = response.data.name;
 	celsiusTemperature = response.data.main.temp;
 	document.querySelector("#temperature").innerHTML = Math.round(celsiusTemperature);
@@ -122,50 +134,57 @@ function displayWeather(response) {
 }
 
 
+function search(city) {
+	let apiUrl = `${apiBase}/data/2.5/weather?q=${city}&appid=${apiKey}&units=${units}`;
+	axios.get(apiUrl).then(displayWeather);
+  }
 
+  function handleSubmit(event) {
+	event.preventDefault();
+	let cityInputElement = document.querySelector("#city-input");
+	search(cityInputElement.value);
+}
 
+function displayFahrenheitTemperature(event) {
+	event.preventDefault();
+	let temperatureElement = document.querySelector("#temperature");
+	
+	celsiusLink.classList.remove("active");
+	fahrenheitLink.classList.add("active");
+	//let fahrenheitTemperature = (celsiusTemperature * 9) / 5 + 32;
+	//temperatureElement.innerHTML = Math.round(fahrenheitTemperature);
+	units="imperial";
+	search(currentCity);
+}
 
+function displayCelsiusTemperature(event) {
+	event.preventDefault();
 
+	fahrenheitLink.classList.remove("active");
+	celsiusLink.classList.add("active");
+	//let temperatureElement = document.querySelector("#temperature");
+	//temperatureElement.innerHTML = Math.round(celsiusTemperature);
+	units="metric";
+	search(currentCity);
+}
 
-
-
-
-
-
-let curdate = document.querySelector(".forecast2 .text2");
-curdate.innerHTML = fullDate;
+let celsiusTemperature = null;
 
 let form = document.querySelector("#search-form");
-form.addEventListener("submit", search);
+form.addEventListener("submit", handleSubmit);
 
+let fahrenheitLink = document.querySelector("#fahrenheit-link");
+fahrenheitLink.addEventListener("click", displayFahrenheitTemperature);
 
+let celsiusLink = document.querySelector("#celsius-link");
+celsiusLink.addEventListener("click", displayCelsiusTemperature);
 
-// city
-let sityName = document.querySelector(".sity-name");
-
-
-
-
-// координати
-
-function getCooards(response) {
-	let lat = response.data[0].lat;
-	let lon = response.data[0].lon;
-	let apiUrl = `${apiBase}/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${apiKey}`;
-	axios.get(apiUrl).then(displayWeather);
-}
-
-function search(event) {
-	event.preventDefault();
-	let searchInput = document.querySelector("#search-text-input");
-	let apiUrl = `${apiBase}/geo/1.0/direct?q=${searchInput.value}&limit=1&appid=${apiKey}`;
-	axios.get(apiUrl).then(getCooards);
-}
+// // координати
 
 function searchCurrentLocation(position) {
 	let lat = position.coords.latitude;
 	let lon = position.coords.longitude;
-	let apiUrl = `${apiBase}/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${apiKey}`;
+	let apiUrl = `${apiBase}/data/2.5/weather?lat=${lat}&lon=${lon}&units=${units}&appid=${apiKey}`;
 	axios.get(apiUrl).then(displayWeather);
 }
 
@@ -174,34 +193,35 @@ function getCurrentLocation(event) {
 	navigator.geolocation.getCurrentPosition(searchCurrentLocation);
 }
 
-function displayFahrenheitTemperature(event) {
-	event.preventDefault();
-	let temperatureElement = document.querySelector("#temperature");
-	// remove the active class the celsius link
-	celsiusLink.classList.remove("active");
-	fahrenheitLink.classList.add("active");
-	let fahrenheitTemperature = (celsiusTemperature * 9) / 5 + 32;
-	temperatureElement.innerHTML = Math.round(fahrenheitTemperature);
-}
-
-function displayCelsiusTemperature(event) {
-	event.preventDefault();
-	celsiusLink.classList.add("active");
-	fahrenheitLink.classList.remove("active");
-	let temperatureElement = document.querySelector("#temperature");
-	temperatureElement.innerHTML = Math.round(celsiusTemperature);
-}
-
 let currentLocationButton = document.querySelector("#geolocation");
 currentLocationButton.addEventListener("click", getCurrentLocation);
 
-let celsiusTemperature = null;
 
-let fahrenheitLink = document.querySelector("#fahrenheit-link");
-fahrenheitLink.addEventListener("click", displayFahrenheitTemperature);
+search(currentCity);
 
-let celsiusLink = document.querySelector("#celsius-link");
-celsiusLink.addEventListener("click", displayCelsiusTemperature);
+
+
+
+
+
+
+// function getCooards(response) {
+// 	let lat = response.data[0].lat;
+// 	let lon = response.data[0].lon;
+// 	let apiUrl = `${apiBase}/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${apiKey}`;
+// 	axios.get(apiUrl).then(displayWeather);
+// }
+
+
+
+
+
+
+
+
+// // city
+// let sityName = document.querySelector(".sity-name");
+
 
 
 

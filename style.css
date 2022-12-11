@@ -53,6 +53,7 @@ h5,
 p {
   margin: 0;
   padding: 0;
+  
 }
 button {
   padding-left: 0px;
@@ -235,18 +236,22 @@ padding-top: 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 270px;
+  width: 300px;
   margin-left: auto;
   margin-right: auto;
   margin-top: 25px;
 }
 
+
+
 .forecast1 img {
   font-size: 55px;
 }
+
 .forecast1 h3 {
   font-size: 70px;
 }
+
 .button-CF {
   display: flex;
   flex-direction: column;
@@ -372,6 +377,7 @@ color: var(--text-color);
 .card-title {
 font-size: 20px;
 padding-top: 8px;
+padding-left: 10px;
 }
 
 .card-2-title {
@@ -382,14 +388,17 @@ padding-top: 8px;
   font-size: 26px;
   padding-bottom: 8px;
 }
-.card-text span {
-  font-size: 16px;
-}
+
 .card-2-text {
   font-size: 14px;
   padding-bottom: 8px;
 }
 
+.pad {
+  font-size: 26px;
+  padding-bottom: 8px;
+  padding-left: 4px;
+}
 /* footer */
 
 .footer-title {
