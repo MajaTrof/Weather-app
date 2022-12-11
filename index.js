@@ -24,6 +24,8 @@ let months = [
 	"December",
 ];
 
+
+
 let myDate = new Date();
 let minute = myDate.getMinutes();
 let second = myDate.getSeconds();
@@ -50,6 +52,86 @@ let fullDate =
 	":" +
 	myDate.getSeconds();
 
+
+	let apiBase = "https://api.openweathermap.org";
+	let apiKey = "2d96d64425dca1d6eda00d942a281c0d";
+
+
+function formatDay(timestamp) {
+	let date = new Date(timestamp * 1000);
+	let day = date.getDay();
+	let days = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat",];
+
+	return days[day];
+}
+
+function displayForecast(response) {
+	let forecast = response.data.daily;
+	let forecastElement = document.querySelector("#forecast");
+
+	let forecastHTML = `<div class="row">`;
+	forecast.forEach(function (forecastDay, index) {
+		if (index < 7) {
+			forecastHTML =
+			forecastHTML +
+			`
+		<div class="col-2  weather">
+		<h4 class="card-title">${formatDay(forecastDay.dt)}</h4>
+		<h4 class="card-title"></h4>
+		<h5 class="card-2-title"> 
+		<img src="http://openweathermap.org//img/wn/${
+			forecastDay.weather[0].icon
+		}@2x.png" alt="icon"  class="card-2-title" />  
+		</h5>
+		<p class="card-text">${Math.round(forecastDay.temp.max)}&deg;<span>${Math.round(
+				forecastDay.temp.min)
+			} &deg;</span></p>
+		<p class="card-2-text">Cloudy</p>
+		</div>
+		`;
+	    }
+    });
+		
+	forecastHTML = forecastHTML + `</div>`;
+	forecastElement.innerHTML = forecastHTML;
+}
+
+function getForecast(coordinates) {
+	console.log(coordinates);
+	let apiUrl = `${apiBase}/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
+	axios.get(apiUrl).then(displayForecast);
+}
+
+// змінює параметри погодні відносно міста
+function displayWeather(response) {
+	document.querySelector(".sity-name").innerHTML = response.data.name;
+	celsiusTemperature = response.data.main.temp;
+	document.querySelector("#temperature").innerHTML = Math.round(celsiusTemperature);
+	document.querySelector(".text1").innerHTML = response.data.weather[0].description;
+	document.querySelector("#humidity").innerHTML = response.data.main.humidity;
+	document.querySelector("#wind").innerHTML = Math.round(response.data.wind.speed);
+	document.querySelector("#feels").innerHTML = Math.round(response.data.main.feels_like);
+	document.querySelector("#temp_max").innerHTML = Math.round(response.data.main.temp_max);
+	document.querySelector("#temp_min").innerHTML = Math.round(response.data.main.temp_min);
+	document.querySelector("#visibility").innerHTML = response.data.visibility / 1000;
+	let iconElement = document.querySelector("#icon");
+	iconElement.setAttribute("src",`http://openweathermap.org//img/wn/${response.data.weather[0].icon}@2x.png`);
+	iconElement.setAttribute("alt", response.data.weather[0].description);
+
+	getForecast(response.data.coord);
+}
+
+
+
+
+
+
+
+
+
+
+
+
 let curdate = document.querySelector(".forecast2 .text2");
 curdate.innerHTML = fullDate;
 
@@ -61,42 +143,10 @@ form.addEventListener("submit", search);
 // city
 let sityName = document.querySelector(".sity-name");
 
-// змінює параметри погодні відносно міста
 
-function displayWeather(response) {
-	console.log(response.data);
-	document.querySelector(".sity-name").innerHTML = response.data.name;
-	celsiusTemperature = response.data.main.temp;
-	document.querySelector("#temperature").innerHTML = Math.round(celsiusTemperature);
-	document.querySelector(".text1").innerHTML =
-		response.data.weather[0].description;
-	document.querySelector("#humidity").innerHTML = response.data.main.humidity;
-	document.querySelector("#wind").innerHTML = Math.round(
-		response.data.wind.speed
-	);
-	document.querySelector("#feels").innerHTML = Math.round(
-		response.data.main.feels_like
-	);
-	document.querySelector("#temp_max").innerHTML = Math.round(
-		response.data.main.temp_max
-	);
-	document.querySelector("#temp_min").innerHTML = Math.round(
-		response.data.main.temp_min
-	);
-	document.querySelector("#visibility").innerHTML =
-		response.data.visibility / 1000;
-	let iconElement = document.querySelector("#icon");
-	iconElement.setAttribute(
-		"src",
-		`http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
-	);
-	iconElement.setAttribute("alt", response.data.weather[0].description);
-	
-}
 
-// координати 
-let apiBase = "https://api.openweathermap.org";
-let apiKey = "c37d0dfd5549fa6fcf6341cead866ac4";
+
+// координати
 
 function getCooards(response) {
 	let lat = response.data[0].lat;
@@ -117,7 +167,7 @@ function searchCurrentLocation(position) {
 	let lon = position.coords.longitude;
 	let apiUrl = `${apiBase}/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${apiKey}`;
 	axios.get(apiUrl).then(displayWeather);
-	}
+}
 
 function getCurrentLocation(event) {
 	event.preventDefault();
@@ -153,6 +203,8 @@ fahrenheitLink.addEventListener("click", displayFahrenheitTemperature);
 let celsiusLink = document.querySelector("#celsius-link");
 celsiusLink.addEventListener("click", displayCelsiusTemperature);
 
+
+
 // temp C F
 
 // let number = document.querySelector(".number");
@@ -172,3 +224,40 @@ celsiusLink.addEventListener("click", displayCelsiusTemperature);
 
 // tempChangeFar.addEventListener("click", changeF);
 // tempChangeCel.addEventListener("click", changeC);
+
+// <div class="weather">
+// 	<h4 class="card-title">Tue 25</h4>
+// 	<h5 class="card-2-title">🌤</h5>
+// 	<p class="card-text">28 &deg; <span></span>24 &deg;</p>
+// 	<p class="card-2-text">Cloudy</p>
+// </div>
+// <div class="weather">
+// 	<h4 class="card-title">Tue 25</h4>
+// 	<h5 class="card-2-title">🌤</h5>
+// 	<p class="card-text">28 &deg;<span> 24 &deg;</span></p>
+// 	<p class="card-2-text">Cloudy</p>
+// </div>
+// <div class="weather">
+// 	<h4 class="card-title">Tue 25</h4>
+// 	<h5 class="card-2-title">🌤</h5>
+// 	<p class="card-text">28 &deg;<span> 24 &deg;</span></p>
+// 	<p class="card-2-text">Cloudy</p>
+// </div>
+// <div class="weather">
+// 	<h4 class="card-title">Tue 25</h4>
+// 	<h5 class="card-2-title">🌤</h5>
+// 	<p class="card-text">28 &deg; <span>24 &deg;</span></p>
+// 	<p class="card-2-text">Cloudy</p>
+// </div>
+// <div class="weather">
+// 	<h4 class="card-title">Tue 25</h4>
+// 	<h5 class="card-2-title">🌤</h5>
+// 	<p class="card-text">28 &deg; <span>24 &deg;</span></p>
+// 	<p class="card-2-text">Cloudy</p>
+// </div>
+// <div class="weather">
+// 	<h4 class="card-title">Tue 25</h4>
+// 	<h5 class="card-2-title">🌤</h5>
+// 	<p class="card-text">28 &deg; <span>24 &deg;</span></p>
+// 	<p class="card-2-text">Cloudy</p>
+// </div>

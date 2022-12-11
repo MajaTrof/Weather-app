@@ -346,14 +346,27 @@ margin-right: 20px;
 
 
 /* картки */
+.row {
+  width: 100%;
+}
+
 .weather {
-  width: calc((100% - 120px) / 7);
+  width: calc((100% - 130px) / 7);
+  margin-right: 20px;
   padding-left: 6px;
   background:rgba(149, 121, 144, 0.4);
   box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.4), 0px 1px 1px rgba(0, 0, 0, 0.14), 0px 2px 1px rgba(0, 0, 0, 0.2);
 border-radius: 0px 0px 4px 4px;
 text-align: left;
 color: var(--text-color);
+}
+
+.weather:first-child {
+  margin-left: 10px;
+}
+
+.weather:last-child {
+  margin-right: 0;
 }
 
 .card-title {
@@ -363,7 +376,7 @@ padding-top: 8px;
 
 .card-2-title {
   font-size: 40px;
-  padding-left: 6px;
+  
 }
 .card-text {
   font-size: 26px;
